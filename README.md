@@ -62,9 +62,13 @@ Dockerfile uses Ubuntu 18.04 as base and gets gcc compiler, pip and python. The 
 This app runs with `Docker` using docker-compose.
 
 **Local Dev Setup**
-To run the app make sure to clone this repo with the git clone command followed by the following command for local development set up:
+To run the app make sure to clone this repo with the git clone command followed by the following command for local development set up(check config file first) using:
 
-    docker-compose up
+    docker-compose --env-file ./config/config.env config
+
+To run app if configuration is fine run (if not fine - then export the variables into .awsconfig and source into bashrc):
+
+    docker-compose --env-file ./config/config.env up
 
 This should show you the file_writer container streaming data in. The logic developed is, we fill a buffer for 12 hours,as workers on shifts can take a look (this is customizable, you can change it to 6 mins too by setting timing = 6 and time_type='m' in config.py(m=minutes,h=hours,s=seconds). The app waits for 12 hours while filling the buffer, once 12 hours are done, we check whether the file exists in the bucket if it doesn't we upload it to the s3. Once the buffer is emptied, we remove the uploaded files(the ones already present in s3 and the ones uploaded) from the base volume and continue the process.
 
