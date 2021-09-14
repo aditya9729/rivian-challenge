@@ -1,0 +1,20 @@
+# A trivial file-writer app deployment spec
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-writer
+  labels:
+    app: file-writer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-writer
+  template:
+    metadata:
+      labels:
+        app: file-writer
+    spec:
+      containers:
+      - name: file-writer
+        image: rivianmfg/rivian-mfg-file-writer:latest

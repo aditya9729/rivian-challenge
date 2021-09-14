@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+ file-writer:
+  image: rivianmfg/rivian-mfg-file-writer:latest
+  container_name: file-writer
+  mem_limit: 512M
+  volumes:
+    - ./base:/var/file-writer/data
+  networks:
+    - connector
+ app:
+  build: .
+  command: python3 file_writer.py write_to_s3 --config=config/config.yaml
+  #command: python3 file_writer.py test --config=config/config.yaml
+  container_name: app
+  mem_limit: 512M
+  links:
+    - file-writer
+  volumes:
+    - .:/app
+    - ./base:/var/file-writer/data
+  environment:
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    AWS_REGION: "${AWS_REGION}"
+  networks:
+    - connector
+networks:
+  connector: {}
+volumes:
+  base: {}

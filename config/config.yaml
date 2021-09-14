@@ -1,0 +1,9 @@
+file_writer_s3:
+  bucket_name: fill_here
+  folder_name: base
+  concurrency: 10
+  usethreads: True
+  storage: 5
+file_writer_test:
+  source_folder: base
+  destination_folder: tmp2
