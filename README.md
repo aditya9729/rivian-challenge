@@ -86,7 +86,7 @@ Comment out the s3 python3 command within `docker-compose.yaml` file and comment
 This should stream the files into a destination tmp2 folder on local disk every 1 minute, using the same logic as s3 uploader app.
 
 ## Capacity Planning
-I have explained some capacity planning for the operators above. Furthermore I have seen the data coming in are on average 12 files per second of size 1KB each - which is literally 12KB of data per second or 43 MB per hour or 516 MB per 12 hours. Keeping a cap of 1 GB for local disk since every 12 hours, this gets cleaned up would be great. Bandwidth of 1 Mbps would be great for data coming in - assuming seamless transfer and no jitter.
+I have explained some capacity planning for the operators above. Furthermore I have seen the data coming in are on average 100 files per second of size 1KB each - which is literally 100KB of data per second or 360 MB per hour or 4.32 GB per 12 hours. Keeping a cap of 5 GB for local disk since every 12 hours, this gets cleaned up would be great. Bandwidth of 1 Mbps would be great for data coming in - assuming seamless transfer and no jitter.
 
 ## Monitoring
 
